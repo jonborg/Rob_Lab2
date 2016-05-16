@@ -14,12 +14,27 @@ if mode==1
         pause(0.5);
         sonars=pioneer_read_sonars()
         [m,ind]=min(sonars(1:8));
-        if m<300 
+        if m<200 
             stop(t);
             delete(t);
-            pioneer_set_controls(sp,round(vels_rob(1,i)*1000),round(20*(ind-4.5)));
-            pause(1);
-            pioneer_set_controls(sp,round(vels_rob(1,i)*1000),round(vels_rob(2,i)*180/pi));
+            if ind<=4
+                xref=xref+cos(teta_real(i)-pi/4);
+                yref=yref+sin(teta_real(i)-pi/4);
+            else
+                xref=xref+cos(teta_real(i)+pi/4);
+                yref=yref+sin(teta_real(i)+pi/4);
+            end
+            odom=pioneer_read_odometry();
+            xreal(i)=world(1);
+            yreal(i)=world(2);
+            teta_real(i)=-pi/2+2*pi/4096*odom(3);
+            if teta_real(i-1)<0 && odom(3)>3072
+               teta_real(i)=teta_real(i)-2*pi; 
+            end
+                        
+            erro_rob(:,i)=erro(xref(i),yref(i),teta_ref(i),xreal(i),yreal(i),teta_real(i));
+            v(:,i)=Controller(vel,wref(i),erro_rob(:,i));
+            vels_rob(:,i)=[vel*cos(erro_rob(3,i));wref(i)]-v(:,i);
             t=timer('TimerFcn','odometria','StartDelay',T);
             start(t);
         end
