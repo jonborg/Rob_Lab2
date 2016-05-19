@@ -1,8 +1,9 @@
 function [xref,yref,teta_ref,wref] = ref(x,y,t)
 global T;
+global div;
 sx=pchip(t,x);
 sy=pchip(t,y);
-tempo=1:0.05:length(x);
+tempo=1:1/div:length(x);
 
 xref=ppval(sx,tempo);
 yref=ppval(sy,tempo);

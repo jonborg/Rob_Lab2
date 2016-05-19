@@ -11,13 +11,15 @@ if mode==1
     pioneer_set_controls(sp,round(vels_rob(1,i)*1000),round(vels_rob(2,i)*180/pi));
     start(t);
     while flag==0
-        m=6000
+        m=6000;
         pause(1);
         if i>45 && i<335
             sonars=pioneer_read_sonars()
             [m,ind]=min(sonars(1:8));
         end
-        if m<300 
+        if m<400 && ready==1;
+            ready=0;
+            counter=0;
             stop(t);
 %             delete(t);
               if (teta_real(i)<=-pi/4 && teta_real(i)>-3*pi/4)

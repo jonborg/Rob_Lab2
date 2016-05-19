@@ -12,7 +12,7 @@
     plot(xreal*57,57*(28.5-yreal),'b');
     labels = cellstr( num2str([1:length(x)]') );
     j=1;
-    for i=1:20:length(xreal)
+    for i=1:div:length(xreal)
         xe(j)=xreal(i);
         ye(j)=yreal(i);
         j=j+1;
