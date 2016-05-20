@@ -1,4 +1,4 @@
-function [vels_rob] = lab2(vel,mode,port)
+function [results] = lab2(vel,mode,port)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 if mode~=0 && mode~=1
@@ -63,3 +63,4 @@ if mode ==1
     serial_port_stop(sp);
     delete(timerfindall);
 end
+results=[xref',yref',teta_ref'];
