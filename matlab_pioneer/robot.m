@@ -18,10 +18,14 @@ if mode==1
             [m,ind]=min(so(1:8));
         end
         if m<400 && ready==1;
+            stop(t);
+            delete(t);
             sonars;
             flag=1;
             counter=0;
             ready=0
+            t=timer('TimerFcn','odometria','StartDelay',T);
+            start(t);
         end
         if flag==1
             odom=pioneer_read_odometry;
