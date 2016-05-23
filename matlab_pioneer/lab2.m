@@ -46,6 +46,15 @@ counter=6;
 for i=1:length(xref)-1
     flag=0;
     i
+    if i>35 && i<247
+    so=pioneer_read_sonars()
+        [m,ind]=min(so(1:8));
+    end
+    if m<400 && ready==1;
+        sonars;
+        counter=0;
+        ready=0;
+    end
     erro_rob(:,i)=erro(xref(i),yref(i),teta_ref(i),xreal(i),yreal(i),teta_real(i));
     v(:,i)=Controller(vel,wref(i),erro_rob(:,i));
     vels_rob(:,i)=[vel*cos(erro_rob(3,i));wref(i)]-v(:,i);

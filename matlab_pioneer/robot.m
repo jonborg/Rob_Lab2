@@ -11,18 +11,8 @@ if mode==1
     pioneer_set_controls(sp,round(vels_rob(1,i)*1000),round(vels_rob(2,i)*180/pi));
     start(t);
     while flag==0
-        m=6000;
         pause(1);
-        if i>35 && i<247
-            so=pioneer_read_sonars()
-            [m,ind]=min(so(1:8));
-        end
-        if m<400 && ready==1;
-            sonars;
-            flag=1;
-            counter=0;
-            ready=0
-        end
+        m=6000;
         if flag==1
             odom=pioneer_read_odometry;
             while odom(3)>=4096
