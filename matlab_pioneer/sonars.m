@@ -1,4 +1,6 @@
-if i>35 && i<76
+a=div/15;
+if i>round(a*35) && i<round(a*76)
+    ind
     switch ind
         case 1
             teta_real(i)=-pi/2;
@@ -27,7 +29,7 @@ if i>35 && i<76
     end
 end
 
-if i>91 && i<136
+if i>round(a*91) && i<round(a*136)
     switch ind
         case 1
             teta_real(i)=0;
@@ -56,7 +58,7 @@ if i>91 && i<136
     end
 end
 
-if i>151 && i<196
+if i>a*151 && i<a*196
     switch ind
         case 1
             teta_real(i)=pi/2;
@@ -85,7 +87,7 @@ if i>151 && i<196
     end
 end
 
-if i>211 && i<247
+if i>a*211 && i<a*247
     switch ind
         case 1
             teta_real(i)=pi;

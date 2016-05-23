@@ -1,4 +1,4 @@
-function [results] = lab2(vel,mode,port)
+function [results, vels_rob] = lab2(vel,mode,port)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 if mode~=0 && mode~=1
@@ -13,13 +13,13 @@ global T;
 global div;
 global counter;
 global ready;
-div=15
+div=15;
 j=0;
 ready=1;
 T=1.5;
 
 piso5=imread('Piso005crop.png');
-x=[2.5 3.5 6.7 7.5 7.5   7.5 9 12.5 16.5 20   21.7 22 22 21.7 19   15 11 6 3 2.5];
+x=[2.5 3.5 6.7 7.5 7.5   7.5 9 12.5 16.5 20   21.7 21.7 21.7 21.7 19   15 11 6 3 2.5];
 y=[26  22 21 17.7 13.5   9 7.3 7 7 7   9 12.5 16.5 20 21.3   21.5 21.5 21.5 22.5 26];
 adjust=0.15;
 %x=[2 3 6 7.5 7   9 20 22 22 20    8 3 2];
@@ -42,25 +42,28 @@ if mode==1
     plot(xreal(1),yreal(1),'bo',xref(1),yref(1),'ro');
     odom=pioneer_read_odometry();
 end
-counter=6;
+counter=16;
 for i=1:length(xref)-1
     flag=0;
     i
-    if i>35 && i<247
-    so=pioneer_read_sonars()
-        [m,ind]=min(so(1:8));
+    m=6000;
+    if mode==1
+        if i>35 && i<247
+            so=pioneer_read_sonars()
+            [m,ind]=min(so(1:8));
+        end
+        if m<500
+            sonars;
+        end
     end
-    if m<400 && ready==1;
-        sonars;
-        counter=0;
-        ready=0;
-    end
+    plot(xreal(i),yreal(i),'bo',xref(i),yref(i),'ro');
     erro_rob(:,i)=erro(xref(i),yref(i),teta_ref(i),xreal(i),yreal(i),teta_real(i));
     v(:,i)=Controller(vel,wref(i),erro_rob(:,i));
     vels_rob(:,i)=[vel*cos(erro_rob(3,i));wref(i)]-v(:,i);
     robot;
+    
     counter=counter+1;
-    if counter>5
+    if counter>15
         ready=1;
     end
 end

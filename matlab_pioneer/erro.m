@@ -13,6 +13,5 @@ function [erro_rob] = erro(xref,yref,teta_ref,xreal,yreal,teta_real)
     erro_rob=[cos(teta_real) sin(teta_real) 0; -sin(teta_real) cos(teta_real) 0; 0 0 1]*[delta_x delta_y delta_teta]';
     
 
-
 end
 
