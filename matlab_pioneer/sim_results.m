@@ -1,5 +1,5 @@
 
-    imshow(piso5);
+    imshow(piso5,'InitialMagnification',33);
     hold on;
     plot(xref*57,57*(28.5-yref),'r');
     labels = cellstr(num2str([1:length(x)]') );
@@ -7,7 +7,7 @@
     text(57*x,57*(28.5-y),labels);
    
     figure
-    imshow(piso5);
+    imshow(piso5,'InitialMagnification',33);
     hold on;
     plot(xreal*57,57*(28.5-yreal),'b');
     labels = cellstr( num2str([1:length(x)]') );
