@@ -6,6 +6,13 @@ if mode~=0 && mode~=1
    display('Mode=1: Robot');
 end
 
+if vel > 0.2
+   display('Use a velocity no greater than 0.2 m/s'); 
+   results=0;
+   vels_rob=0;
+   return;
+end
+
 close all
 global flag;
 global j;
@@ -13,22 +20,18 @@ global T;
 global div;
 global counter;
 global ready;
-div=15;
+div=10;
 j=0;
 ready=1;
-T=1.5;
-
+T=1.5*0.150/vel*15/div
+adjust=0;
 piso5=imread('Piso005crop.png');
-x=[2.5 3.5 6.7 7.5 7.5   7.5 9 12.5 16.5 20   21.7 21.7 21.7 21.7 19   15 11 6 3 2.5];
-y=[26  22 21 17.7 13.5   9 7.3 7 7 7   9 12.5 16.5 20 21.3   21.5 21.5 21.5 22.5 26];
-adjust=0.15;
-%x=[2 3 6 7.5 7   9 20 22 22 20    8 3 2];
-%y=[26 21 21.5 18 9   7 7 9 20 21.5    21.5 21 26];
- %x=[2 3 6 7.5 7   9 19 22 22 21.5   19 15 8 3 2];
- %y=[26 21.25 21.5 18 9   7 7 9 14 20   21.5 21.5 21.5 21 26];
+x=[2.5 3 6.7 7.5 7.5   7.5 9 12.5 16.5 20   21 21 21 21 19   15 11 6 3 2.5];
+y=[26  22 21 17.7 13.5   9 7.5 7.5 7.5 7.5   9 12.5 16.5 19.7 21   21 21 21.3 22 26];
 t=1:1:length(x);
 
 [xref,yref,teta_ref,wref]=ref(x,y,t);
+Total_time=T*(length(xref)-1)/60
 
 xreal(1)=xref(1);
 yreal(1)=yref(1);
@@ -42,31 +45,67 @@ if mode==1
     plot(xreal(1),yreal(1),'bo',xref(1),yref(1),'ro');
     odom=pioneer_read_odometry();
 end
-counter=16;
+counter=length(x);
+
 for i=1:length(xref)-1
+
     flag=0;
     i
     m=6000;
     if mode==1
-        if i>35 && i<247
-            so=pioneer_read_sonars()
-            [m,ind]=min(so(1:8));
+        if i>floor(div/15*45) && i<floor(div/15*252)
+            so=pioneer_read_sonars();
+            so=so(1:8);
+            [m,ind]=min(so);
         end
-        if m<500
+        if m<800 && ready==1
+            so
             sonars;
+            counter=0;
+            ready=0;
+            so=so/1000;
+            if so(1)<5
+            plot(xreal(i)+so(1)*cos(teta_real(i)+90*pi/180),yreal(i)+so(1)*sin(teta_real(i)+90*pi/180),'ko');
+            end
+            if so(2)<5
+            plot(xreal(i)+so(2)*cos(teta_real(i)+50*pi/180),yreal(i)+so(2)*sin(teta_real(i)+50*pi/180),'co');
+            end
+            if so(3)<5
+            plot(xreal(i)+so(3)*cos(teta_real(i)+30*pi/180),yreal(i)+so(3)*sin(teta_real(i)+30*pi/180),'go');
+            end
+            if so(4)<5
+            plot(xreal(i)+so(4)*cos(teta_real(i)+10*pi/180),yreal(i)+so(4)*sin(teta_real(i)+10*pi/180),'yo');
+            end
+            if so(5)<5
+            plot(xreal(i)+so(5)*cos(teta_real(i)-10*pi/180),yreal(i)+so(5)*sin(teta_real(i)-10*pi/180),'yo');
+            end
+            if so(6)<5
+            plot(xreal(i)+so(6)*cos(teta_real(i)-30*pi/180),yreal(i)+so(6)*sin(teta_real(i)-30*pi/180),'go');
+            end
+            if so(7)<5
+            plot(xreal(i)+so(7)*cos(teta_real(i)-50*pi/180),yreal(i)+so(7)*sin(teta_real(i)-50*pi/180),'co');
+            end
+            if so(8)<5
+            plot(xreal(i)+so(8)*cos(teta_real(i)-90*pi/180),yreal(i)+so(8)*sin(teta_real(i)-90*pi/180),'ko');
+            end
+            so=so*1000;
         end
     end
     plot(xreal(i),yreal(i),'bo',xref(i),yref(i),'ro');
     erro_rob(:,i)=erro(xref(i),yref(i),teta_ref(i),xreal(i),yreal(i),teta_real(i));
+
     v(:,i)=Controller(vel,wref(i),erro_rob(:,i));
     vels_rob(:,i)=[vel*cos(erro_rob(3,i));wref(i)]-v(:,i);
+    vels_rob(1,i)=max(vels_rob(1,i),-vel*0.5);
+    vels_rob(1,i)=min(vels_rob(1,i),vel+0.4*vel);
     robot;
-    
+    pose=[xreal(i) yreal(i) teta_real(i)]
     counter=counter+1;
-    if counter>15
+    if counter>0
         ready=1;
     end
 end
+
 if mode==0
     sim_results;
 end

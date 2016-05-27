@@ -1,8 +1,8 @@
 function [v] = Controller(vel,wref,erro_rob)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-    damp=2;
-    g=0.5;
+    damp=0.7;
+    g=3;
     wn=sqrt(wref^2+g*(vel)^2);
     K1=2*damp*wn;
     K2=g*abs(vel);
