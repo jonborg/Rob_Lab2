@@ -64,28 +64,28 @@ for i=1:length(xref)-1
             counter=0;
             ready=0;
             so=so/1000;
-            if so(1)<5
+            if so(1)<3
             plot(xreal(i)+so(1)*cos(teta_real(i)+90*pi/180),yreal(i)+so(1)*sin(teta_real(i)+90*pi/180),'ko');
             end
-            if so(2)<5
+            if so(2)<3
             plot(xreal(i)+so(2)*cos(teta_real(i)+50*pi/180),yreal(i)+so(2)*sin(teta_real(i)+50*pi/180),'co');
             end
-            if so(3)<5
+            if so(3)<3
             plot(xreal(i)+so(3)*cos(teta_real(i)+30*pi/180),yreal(i)+so(3)*sin(teta_real(i)+30*pi/180),'go');
             end
-            if so(4)<5
+            if so(4)<3
             plot(xreal(i)+so(4)*cos(teta_real(i)+10*pi/180),yreal(i)+so(4)*sin(teta_real(i)+10*pi/180),'yo');
             end
-            if so(5)<5
+            if so(5)<3
             plot(xreal(i)+so(5)*cos(teta_real(i)-10*pi/180),yreal(i)+so(5)*sin(teta_real(i)-10*pi/180),'yo');
             end
-            if so(6)<5
+            if so(6)<3
             plot(xreal(i)+so(6)*cos(teta_real(i)-30*pi/180),yreal(i)+so(6)*sin(teta_real(i)-30*pi/180),'go');
             end
-            if so(7)<5
+            if so(7)<3
             plot(xreal(i)+so(7)*cos(teta_real(i)-50*pi/180),yreal(i)+so(7)*sin(teta_real(i)-50*pi/180),'co');
             end
-            if so(8)<5
+            if so(8)<3
             plot(xreal(i)+so(8)*cos(teta_real(i)-90*pi/180),yreal(i)+so(8)*sin(teta_real(i)-90*pi/180),'ko');
             end
             so=so*1000;
