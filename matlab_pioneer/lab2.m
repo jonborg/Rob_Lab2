@@ -26,8 +26,8 @@ ready=1;
 T=1.5*0.150/vel*15/div
 adjust=0;
 piso5=imread('Piso005crop.png');
-x=[2.5 3 6.7 7.5 7.5   7.5 9 12.5 16.5 20   21 21 21 21 19   15 11 6 3 2.5];
-y=[26  22 21 17.7 13.5   9 7.5 7.5 7.5 7.5   9 12.5 16.5 19.7 21   21 21 21.3 22 26];
+x=[2.5 3 6.7 7.5 7.5   7.5 9 12.5 16.5 20   21 21.2 21.2 21.2 19.5   15 11 6 3 2.5];
+y=[26  22 21 17.7 13.5   9 7.7 7.7 7.7 7.7   9 12.7 16.5 19.7 21.1   21.2 21.2 21 22 26];
 t=1:1:length(x);
 
 [xref,yref,teta_ref,wref]=ref(x,y,t);
@@ -64,28 +64,28 @@ for i=1:length(xref)-1
             counter=0;
             ready=0;
             so=so/1000;
-            if so(1)<3
+            if so(1)<5
             plot(xreal(i)+so(1)*cos(teta_real(i)+90*pi/180),yreal(i)+so(1)*sin(teta_real(i)+90*pi/180),'ko');
             end
-            if so(2)<3
+            if so(2)<5
             plot(xreal(i)+so(2)*cos(teta_real(i)+50*pi/180),yreal(i)+so(2)*sin(teta_real(i)+50*pi/180),'co');
             end
-            if so(3)<3
+            if so(3)<5
             plot(xreal(i)+so(3)*cos(teta_real(i)+30*pi/180),yreal(i)+so(3)*sin(teta_real(i)+30*pi/180),'go');
             end
-            if so(4)<3
+            if so(4)<5
             plot(xreal(i)+so(4)*cos(teta_real(i)+10*pi/180),yreal(i)+so(4)*sin(teta_real(i)+10*pi/180),'yo');
             end
-            if so(5)<3
+            if so(5)<5
             plot(xreal(i)+so(5)*cos(teta_real(i)-10*pi/180),yreal(i)+so(5)*sin(teta_real(i)-10*pi/180),'yo');
             end
-            if so(6)<3
+            if so(6)<5
             plot(xreal(i)+so(6)*cos(teta_real(i)-30*pi/180),yreal(i)+so(6)*sin(teta_real(i)-30*pi/180),'go');
             end
-            if so(7)<3
+            if so(7)<5
             plot(xreal(i)+so(7)*cos(teta_real(i)-50*pi/180),yreal(i)+so(7)*sin(teta_real(i)-50*pi/180),'co');
             end
-            if so(8)<3
+            if so(8)<5
             plot(xreal(i)+so(8)*cos(teta_real(i)-90*pi/180),yreal(i)+so(8)*sin(teta_real(i)-90*pi/180),'ko');
             end
             so=so*1000;
@@ -114,4 +114,4 @@ if mode ==1
     serial_port_stop(sp);
     delete(timerfindall);
 end
-results=[xref',yref',teta_ref'];
+results=[xreal',yreal',teta_real'];

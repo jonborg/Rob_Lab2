@@ -31,26 +31,26 @@ if ready==1
         end
     end
 
-    if i>floor(a*91) && i<floor(a*136)
+    if i>floor(a*91) && i<=floor(a*136)
 %        so(1:4)=[5000 5000 5000 5000];
         [m,ind]=min(so);
         switch ind
             case 1
-                yreal(i)=8.25+adjust-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 2
-                yreal(i)=8.25+adjust-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 3
-                yreal(i)=8.25+adjust-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 4
-                yreal(i)=8.25+adjust-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 5
-                yreal(i)=6.65+adjust+r+so(ind)/1000;
+                yreal(i)=6.65+r+so(ind)/1000;
             case 6
-                yreal(i)=6.65+adjust+r+so(ind)/1000;
+                yreal(i)=6.65+r+so(ind)/1000;
             case 7
-                yreal(i)=6.65+adjust+r+so(ind)/1000;
+                yreal(i)=6.65+r+so(ind)/1000;
             case 8 
-                yreal(i)=6.65+adjust+r+so(ind)/1000;
+                yreal(i)=6.65+r+so(ind)/1000;
         end
     end
 
@@ -108,9 +108,10 @@ if i==floor(a*76)
 %         end
 %     end
     yreal(i)=6.65+r+min(so(4:5))/1000;
+    
 end
 
-if i==floor(a*136)
+if i<=floor(a*136)&& i>=floor(a*134)
 %     minimo
 %     for i=2:7
 %         if abs(xreal(i)+so(i)/1000*cos(teta_real(i)+(50-20*(i-2))*pi/180)-21.85)<minimo
@@ -119,6 +120,7 @@ if i==floor(a*136)
 %         end
 %     end
     xreal(i)=21.85-r-min(so(4:5))/1000;
+    teta_real(i)=0;
 end
 
 if i==floor(a*196)
@@ -130,5 +132,5 @@ if i==floor(a*196)
 %         end
 %     end
     yreal(i)=21.85-r-min(so(4:5))/1000;
-
+    teta_real(i)=pi/2;
 end
