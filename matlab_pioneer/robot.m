@@ -16,6 +16,7 @@ if mode==1
                 odomp=[0 0 0];
             else
                 odomp=odom;
+                
             end
             odom=pioneer_read_odometry;
 
@@ -23,16 +24,15 @@ if mode==1
             xreal(i+1)=xreal(i)+world(1);
             yreal(i+1)=yreal(i)+world(2);
             dif=odom(3)-odomp(3);
-            if dif>2048
+            if dif>3000
                 odomp(3)=odomp(3)+4096;
                 dif=odom(3)-odomp(3);
             end
-            if dif<-2048
+            if dif<-3000
                 odom(3)=odom(3)+4096;
                 dif=odom(3)-odomp(3);
             end
             teta_real(i+1)=teta_real(i)+2*pi/4096*dif;
-            odom
             delete(t);
             flag=2;
         end

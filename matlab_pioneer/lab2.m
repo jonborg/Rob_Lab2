@@ -23,11 +23,11 @@ global ready;
 div=10;
 j=0;
 ready=1;
-T=1.5*0.150/vel*15/div
+T=round((1.5*0.150/vel*15/div)*100)/100
 adjust=0;
 piso5=imread('Piso005crop.png');
-x=[2.5 3 6.7 7.5 7.5   7.5 9 12.5 16.5 19.6   21.4 21.4 21.4 21.4 19.5   15 11 6 3 2.5];
-y=[26  22 21 17.7 13.5   9 7.7 7.7 7.7 7.7   9 12.7 16.5 19.7 21.1   21.2 21.2 21 22 26];
+x=[2.5 3 6.7 7.5 7.5   7.5 9 12.5 16.5 19.6   21.2 21.2 21.2 21.2 19.5   15 11 6 3 2.5];
+y=[26  22 21 17.7 13.5   9 8 8 8 8   9 12.7 16.5 19 20.7   21 21 21 22 24];
 t=1:1:length(x);
 
 [xref,yref,teta_ref,wref]=ref(x,y,t);
@@ -58,11 +58,10 @@ for i=1:length(xref)-1
             so=so(1:8);
             [m,ind]=min(so);
         end
-        if m<800 && ready==1
-            so
+        if m<800 %&& ready==1
             sonars;
-            counter=0;
-            ready=0;
+            %counter=0;
+            %ready=0;
             so=so/1000;
             if so(1)<5
             plot(xreal(i)+so(1)*cos(teta_real(i)+90*pi/180),yreal(i)+so(1)*sin(teta_real(i)+90*pi/180),'ko');
@@ -90,18 +89,19 @@ for i=1:length(xref)-1
             end
             so=so*1000;
         end
+        
     end
     plot(xreal(i),yreal(i),'bo',xref(i),yref(i),'ro');
     erro_rob(:,i)=erro(xref(i),yref(i),teta_ref(i),xreal(i),yreal(i),teta_real(i));
 
     v(:,i)=Controller(vel,wref(i),erro_rob(:,i));
     vels_rob(:,i)=[vel*cos(erro_rob(3,i));wref(i)]-v(:,i);
-    vels_rob(1,i)=max(vels_rob(1,i),-vel*0.5);
+    vels_rob(1,i)=max(vels_rob(1,i),-vel*0.2);
     vels_rob(1,i)=min(vels_rob(1,i),vel+0.4*vel);
     robot;
     pose=[xreal(i) yreal(i) teta_real(i)]
     counter=counter+1;
-    if counter>0
+    if counter>16
         ready=1;
     end
 end
