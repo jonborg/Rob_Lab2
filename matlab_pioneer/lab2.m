@@ -27,7 +27,7 @@ T=round((1.5*0.150/vel*15/div)*100)/100
 adjust=0;
 piso5=imread('Piso005crop.png');
 x=[2.5 3 6.7 7.5 7.5   7.5 9 12.5 16.5 19.6   21.2 21.2 21.2 21.2 19.5   15 11 6 3 2.5];
-y=[26  22 21 17.7 13.5   9 8 8 8 8   9 12.7 16.5 19 20.7   21 21 21 22 24];
+y=[26  22 21 17.7 13.5   9 7.5 7.5 7.5 7.5   9 12.7 16.5 19 20.7   21 21 21 22 24];
 t=1:1:length(x);
 
 [xref,yref,teta_ref,wref]=ref(x,y,t);
@@ -53,7 +53,7 @@ for i=1:length(xref)-1
     i
     m=6000;
     if mode==1
-        if i>floor(div/15*45) && i<floor(div/15*252)
+        if i>floor(div/15*45) && i<floor(div/15*256)
             so=pioneer_read_sonars();
             so=so(1:8);
             [m,ind]=min(so);

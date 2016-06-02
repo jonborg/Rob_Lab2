@@ -26,7 +26,7 @@ r=0.19;
                 xreal(i)=6.65+r+so(ind)/1000;
             case 8 
                 %teta_real(i)=-pi/2;
-                if  ready==1
+                if  ready==1 && i>floor(a*55)
                     counter=0
                     ready=0;
                     teta_real(i)=-pi/2;
@@ -39,21 +39,21 @@ r=0.19;
 %        so(1:4)=[5000 5000 5000 5000];
         switch ind
             case 1
-                yreal(i)=8.25+0.6-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 2
-                yreal(i)=8.25+0.6-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 3
-                yreal(i)=8.25+0-6-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 4
-                yreal(i)=8.25+0.6-r-so(ind)/1000;
+                yreal(i)=8.25-r-so(ind)/1000;
             case 5
-                yreal(i)=6.65+0.6+r+so(ind)/1000;
+                yreal(i)=6.65+r+so(ind)/1000;
             case 6
-                yreal(i)=6.65+0.6+r+so(ind)/1000;
+                yreal(i)=6.65+r+so(ind)/1000;
             case 7
-                yreal(i)=6.65+0.6+r+so(ind)/1000;
+                yreal(i)=6.65+r+so(ind)/1000;
             case 8 
-                if  ready==1
+                if  ready==1 && i>floor(a*101)
                     counter=0
                     ready=0;
                     teta_real(i)=0;
@@ -66,35 +66,35 @@ r=0.19;
  %       so(1:4)=[5000 5000 5000 5000];
         switch ind
             case 1
-                xreal(i)=20.25+r+so(ind)/1000;
+                xreal(i)=20.25+0.3+r+so(ind)/1000;
             case 2
-                xreal(i)=20.25+r+so(ind)/1000;
+                xreal(i)=20.25+0.3+r+so(ind)/1000;
             case 3
-                xreal(i)=20.25+r+so(ind)/1000;
+                xreal(i)=20.25+0.3+r+so(ind)/1000;
             case 4
-                xreal(i)=20.25+r+so(ind)/1000;
+                xreal(i)=20.25+0.3+r+so(ind)/1000;
             case 5
-                xreal(i)=21.85-r-so(ind)/1000;
+                xreal(i)=21.85+0.3-r-so(ind)/1000;
             case 6
-                xreal(i)=21.85-r-so(ind)/1000;
+                xreal(i)=21.85+0.3-r-so(ind)/1000;
             case 7
-                xreal(i)=21.85-r-so(ind)/1000;
+                xreal(i)=21.85+0.3-r-so(ind)/1000;
             case 8 
-                if  ready==1
+                if  ready==1 && i>floor(a*141)
                     counter=0
                     ready=0;
                     teta_real(i)=pi/2;
                 end
-                xreal(i)=21.85-r-so(ind)/1000;
+                xreal(i)=21.85+0.3-r-so(ind)/1000;
         end
         
     end
 
-    if i>=floor(a*211) && i<ceil(a*256)
+    if i>=floor(a*211) && i<ceil(a*254)
         ind
         switch ind
             case 1       
-                if  ready==1
+                if  ready==1 && i>floor(a*221)
                     counter=0
                     ready=0;
                     teta_real(i)=pi;
@@ -115,7 +115,7 @@ r=0.19;
                 yreal(i)=21.85-r-so(ind)/1000;
             case 8
                 
-                if  ready==1
+                if  ready==1 && i>floor(a*221)
                     counter=0
                     ready=0;
                     teta_real(i)=pi;
@@ -133,7 +133,7 @@ if i==ceil(a*76)
 %             indice=i;
 %         end
 %     end
-    yreal(i)=6.65+0.6+r+min(so(4:5))*cos(10*pi/180)/1000;
+    yreal(i)=6.65+r+min(so(4))*cos(10*pi/180)/1000;
     
 end
 
@@ -145,7 +145,7 @@ if i==ceil(a*136)
 %             indice=i;
 %         end
 %     end
-    xreal(i)=21.85-0.6-r-min(so(4:5))*cos(10*pi/180)/1000;
+    xreal(i)=21.85+0.6-r-min(so(4))*cos(10*pi/180)/1000;
     %teta_real(i)=teta_ref(i);
 end
 
@@ -157,6 +157,6 @@ if i==ceil(a*196)
 %             indice=i;
 %         end
 %     end
-    yreal(i)=21.85-r-min(so(4:5))*cos(10*pi/180)/1000;
+    yreal(i)=21.85-r-min(so(4))*cos(10*pi/180)/1000;
     
 end
