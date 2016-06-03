@@ -90,7 +90,7 @@ r=0.19;
         
     end
 
-    if i>=floor(a*211) && i<ceil(a*254)
+    if i>=floor(a*211) && i<=ceil(a*271)
         ind
         switch ind
             case 1       
@@ -125,7 +125,7 @@ r=0.19;
         
     end
    
-if i==ceil(a*76)
+if i>floor(a*74) && i<=ceil(a*76)
 %     minimo=5000;
 %     for i=2:7
 %         if abs(yreal(i)+so(i)/1000*sin(teta_real(i)+(50-20*(i-2))*pi/180)-6.65)<minimo
@@ -137,7 +137,7 @@ if i==ceil(a*76)
     
 end
 
-if i==ceil(a*136)
+if  i==ceil(a*136)
 %     minimo
 %     for i=2:7
 %         if abs(xreal(i)+so(i)/1000*cos(teta_real(i)+(50-20*(i-2))*pi/180)-21.85)<minimo
@@ -149,7 +149,7 @@ if i==ceil(a*136)
     %teta_real(i)=teta_ref(i);
 end
 
-if i==ceil(a*196)
+if i>floor(a*190) && i<=ceil(a*196)
 %     minimo
 %     for i=2:7
 %         if abs(yreal(i)+so(i)/1000*sin(teta_real(i)+(50-20*(i-2))*pi/180)-21.85)<minimo
@@ -157,6 +157,11 @@ if i==ceil(a*196)
 %             indice=i;
 %         end
 %     end
-    yreal(i)=21.85-r-min(so(4))*cos(10*pi/180)/1000;
+    yreal(i)=21.85+0.6-r-min(so(4))*cos(10*pi/180)/1000;
     
+end
+ if i==ceil(a*271)
+     xreal(i)=7;
+     yreal(i)=20.7;
+     teta_real(i)=pi; 
 end
